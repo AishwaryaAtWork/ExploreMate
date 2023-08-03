@@ -37,18 +37,21 @@ const App = () => {
     useEffect(()=>{
       setIsLoading(true);
 
-      getPlacesData(type, bounds)
+      if(bounds.sw && bounds.ne){ 
+        getPlacesData(type, bounds)
         .then((data)=>{
-          setPlaces(data);
+          setPlaces(data?.filter((place)=> place.name && place.num_reviews > 0));
+          
           setFilteredPlaces([]);
           setIsLoading(false);
         })
-    },[type, coordinates, bounds]);
+      }
+    },[type, bounds]);
 
   return (
     <>
       <CssBaseline />
-      <Header />
+      <Header setCoordinates={setCoordinates}/>
       <Grid container spacing={3} style={{width: '100%'}}>
         <Grid item xs={12} md={4}>
 
