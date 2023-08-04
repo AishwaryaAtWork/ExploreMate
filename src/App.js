@@ -32,7 +32,7 @@ const App = () => {
       const filteredPlaces = places.filter((place)=> place.rating > rating);
       setFilteredPlaces(filteredPlaces);
 
-    },[rating]);
+    },[rating, places]);
 
     useEffect(()=>{
       setIsLoading(true);
@@ -61,9 +61,10 @@ const App = () => {
         </Grid>
 
         <Grid item xs={12} md={8}>
-
+          <div style={{marginTop: '1rem'}}>
             <Map setCoordinates={setCoordinates} setBounds={setBounds} coordinates={coordinates} 
               places={filteredPlaces?.length ? filteredPlaces : places} setChildClicked={setChildClicked}/>
+          </div>
 
         </Grid>
       </Grid>
